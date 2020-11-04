@@ -13,13 +13,13 @@
     name: policycoreutils-python
     state: installed
 
-- name: 1.6.1.1 Ensure SELinux is not disabled in bootloader configuration (Scored)
-  selinux:
-    policy: targeted
-    state: enforcing
-  tags:
-      - level-1
-      - section-1
-      - "1.1.11"
-      - scored
-  ignore_errors: yes
+# - name: 1.6.1.1 Ensure SELinux is not disabled in bootloader configuration (Scored)
+#   selinux:
+#     policy: targeted
+#     state: enforcing
+#   tags:
+#       - level-1
+#       - section-1
+#       - "1.1.11"
+#       - scored
+#   ignore_errors: yes
