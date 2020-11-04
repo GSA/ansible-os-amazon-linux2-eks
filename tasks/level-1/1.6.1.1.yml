@@ -22,3 +22,4 @@
       - section-1
       - "1.1.11"
       - scored
+  ignore_errors: yes
