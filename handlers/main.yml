@@ -1,4 +1,23 @@
+# Standards: 0.11
 ---
 
-- name: restart nessusagent
-  service: name=nessusagent state=restarted
+- name: Restart sshd
+  service:
+    name: sshd
+    state: restarted
+
+- name: Restart rsyslog
+  service:
+    name: rsyslog
+    state: restarted
+
+- name: Restart auditd
+  service:
+    name: auditd
+    state: restarted
+
+- name: Reconfigure GRUB
+  command: grub2-mkconfig -o /boot/grub2/grub.cfg
+
+- name: Generate auditd rules
+  command: /usr/sbin/augenrules

@@ -1,0 +1,28 @@
+# Standards: 0.11
+---
+
+# 1.6.1.1 Ensure SELinux is not disabled in bootloader configuration (Scored)
+
+- name: 1.6 - Install the SE Linux requirements - libselinux-python
+  yum:
+    name: libselinux-python
+    state: installed
+
+- name: 1.6 - Install the SE Linux requirements - policycoreutils-python
+  yum:
+    name: policycoreutils-python
+    state: installed
+
+- name: 1.6.1.1 Ensure SELinux is enabled in bootloader configuration if it was previously disabled (Scored)
+  replace:
+    dest: "{{ cis_grub_configuration_filename }}"
+    regexp: '^(GRUB_CMDLINE_LINUX_DEFAULT=.*)\"$'
+    replace: '\1 {{ item }}=1"'
+  with_items:
+    - selinux
+    - enforcing
+  notify: Reconfigure GRUB
+  tags:
+    - level-1
+    - "1.6.1.1"
+    - scored

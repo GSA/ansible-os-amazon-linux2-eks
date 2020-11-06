@@ -1,0 +1,12 @@
+---
+
+# Save iptable changes
+
+- name: Save iptable changes
+  shell: iptables-save > /etc/sysconfig/iptables
+  become: true
+  
+- name: Save iptable v6 changes
+  shell: ip6tables-save > /etc/sysconfig/ip6tables
+  become: true
+  ignore_errors: yes

@@ -1,0 +1,54 @@
+# Standards: 0.11
+---
+
+# 4.2.1.1 Ensure rsyslog Service is enabled
+
+- name: 4.2.1.1 - Check if rsyslog is installed
+  command: yum -q list rsyslog
+  ignore_errors: true
+  when: cis_enable_rsyslog
+  register: rsyslog_4_2_1_1
+  tags:
+    - level-1
+    - section-4
+    - "4.2.1.1"
+    - scored
+
+- name: Update /etc/rsyslog.conf
+  copy:
+    src: "{{ role_path }}/files/etc/rsyslog.conf"
+    dest: /etc/rsyslog.conf
+    owner: root
+    group: root
+    mode: '0640'
+    backup: yes
+  tags:
+    - mcaas-added
+
+- name: Update selinux port rules for syslog
+  command: semanage port -a -t syslogd_port_t -p tcp 1556
+  tags:
+    - mcaas-added
+
+- name: Restart rsyslog service
+  service:
+    name: "rsyslog"
+    enabled: true
+    state: restarted
+  tags:
+    - mcaas-added
+
+- name: 4.2.1.1 - Ensure rsyslog Service is enabled
+  service:
+    name: "rsyslog"
+    enabled: true
+    state: started
+  when:
+    - cis_enable_rsyslog
+    - rsyslog_4_2_1_1.rc is not defined or rsyslog_4_2_1_1.rc == 0
+  ignore_errors: false
+  tags:
+    - level-1
+    - section-4
+    - "4.2.1.1"
+    - scored

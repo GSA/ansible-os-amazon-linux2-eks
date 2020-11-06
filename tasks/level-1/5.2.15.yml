@@ -1,0 +1,16 @@
+# Standards: 0.11
+---
+
+# 5.2.15 - Ensure only strong key exhcnage algorithms are used
+
+- name: 5.2.15 - Ensure only strong key exchange algorithms are used
+  lineinfile:
+    regexp: "^KexAlgorithms\\s+"
+    line: "KexAlgorithms {{ cis_sshd_kex_algorithms }}"
+    dest: "{{ cis_sshd_config_filename }}"
+  notify: "Restart sshd"
+  tags:
+    - level-1
+    - section-5
+    - "5.2.15"
+    - scored

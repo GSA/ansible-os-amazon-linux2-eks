@@ -1,0 +1,16 @@
+# Standards: 0.11
+---
+
+# 5.2.7 -  Ensure SSH MaxAuthTries is set to 4 or less
+
+- name: 5.2.7 - Ensure SSH MaxAuthTries is set to 4 or less
+  lineinfile:
+    regexp: "^MaxAuthTries\\s+"
+    line: "MaxAuthTries {{ cis_sshd_max_auth_tries }}"
+    dest: "{{ cis_sshd_config_filename }}"
+  notify: "Restart sshd"
+  tags:
+    - level-1
+    - section-5
+    - "5.2.7"
+    - scored
