@@ -1,9 +1,0 @@
-# Standards: 0.11
----
-
-- hosts: localhost
-  connection: local
-  become: yes
-
-  roles:
-    - ansible-role-cis-amazon-linux

@@ -1,13 +1,42 @@
-# Standards: 0.11
 ---
 
-# - include: preflight.yml
-#   when: cis_apply_level_1_profile or cis_apply_level_2_profile
+- name: Install Nessus agent package yum
+  yum:
+    name: "{{ nessus_agent_package }}"
+    state: present
+    disable_gpg_check: yes
+    validate_certs: no
+  notify: restart nessusagent  
+  when: ansible_pkg_mgr == "yum"
 
-- include: "level-1.yml"
-  become: yes
-  when: cis_apply_level_1_profile
+- name: Install Nessus agent package apt
+  apt:
+    name: "{{ nessus_agent_package }}"
+    state: present
+    force: yes
+  notify: restart nessusagent  
+  when: ansible_pkg_mgr == "apt"
 
-- include: "level-2.yml"
+- name: Check agent link status
+  command: /opt/nessus_agent/sbin/nessuscli agent status
   become: yes
-  when: cis_apply_level_2_profile
+  ignore_errors: yes
+  when: nessus_agent_link  == True
+  register: nessus_link_state
+
+- name: Configure Nessus Agent
+  command: >
+      /opt/nessus_agent/sbin/nessuscli agent link
+      --key={{nessus_agent_key}}
+      --host={{nessus_agent_host}}
+      --port={{nessus_agent_port}}
+      --groups="{{nessus_agent_group}}"
+  become: yes
+  when: nessus_link_state is failed and nessus_agent_link == True
+  notify: restart nessusagent
+
+- name: Ensure nessusagent is started
+  service: 
+    name: nessusagent 
+    state: started 
+    enabled: yes
