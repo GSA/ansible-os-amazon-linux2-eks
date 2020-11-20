@@ -23,7 +23,6 @@
     mode: '0640'
     backup: yes
   tags:
-    - mcaas-added
     - level-1
     - "4.2.1.1"    
 
