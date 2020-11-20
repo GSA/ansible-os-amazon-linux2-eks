@@ -84,6 +84,7 @@ A more advanced example, which includes modifications to the default values used
         cis_enable_rsyslog: true,
         cis_level_1_exclusions: [ 3.5.1.1, 5.3.4 ],
         cis_level_2_exclusions: [ ]
+        cis_rsyslog_server: "myserver.com:1555"
       }
 
 ```

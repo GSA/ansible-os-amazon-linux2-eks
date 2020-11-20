@@ -14,8 +14,8 @@
     - "4.2.1.1"
     - scored
 
-- name: Update /etc/rsyslog.conf
-  copy:
+- name: 4.2.1.1 - Update /etc/rsyslog.conf
+  template:
     src: "{{ role_path }}/files/etc/rsyslog.conf"
     dest: /etc/rsyslog.conf
     owner: root
@@ -24,6 +24,9 @@
     backup: yes
   tags:
     - mcaas-added
+    - level-1
+    - "4.2.1.1"    
+
 
 - name: Update selinux port rules for syslog
   command: semanage port -a -t syslogd_port_t -p tcp 1556
