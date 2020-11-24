@@ -16,7 +16,7 @@
 
 - name: 4.2.1.1 - Update /etc/rsyslog.conf
   template:
-    src: rsyslog.conf
+    src: etc/rsyslog.conf
     dest: /etc/rsyslog.conf
     owner: root
     group: root
