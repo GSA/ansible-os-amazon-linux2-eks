@@ -25,7 +25,7 @@
   copy:
     dest: "{{ item }}"
     content: "{{ cis_local_login_warning_banner }}"
-  with_itmes:
+  with_items:
     - /etc/update-motd.d/99-banner
     - /etc/motd
     - /etc/issue
