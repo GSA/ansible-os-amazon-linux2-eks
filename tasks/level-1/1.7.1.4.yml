@@ -3,14 +3,17 @@
 
 # 1.7.1.4 Ensure permissions on /etc/motd are configured
 - name: Update motd to GSA message
-  file:
-    src: "{{ role_path }}/files/etc/motd"
+  copy:
+    src: /etc/motd
     dest: /etc/motd
     mode: 0644
     owner: root
     group: root
   tags:
-    - mcaas-added
+    - level-1
+    - 1.7.1.4
+    - not-scored
+    - gsa-added
 
 - name: 1.7.1.4 - Ensure permissions on /etc/motd are configured
   file:
