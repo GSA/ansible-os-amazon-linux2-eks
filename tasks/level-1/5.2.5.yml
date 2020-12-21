@@ -6,7 +6,7 @@
 - name: 5.2.5 - Ensure SSH LogLevel is set to INFO
   lineinfile:
     regexp: "^LogLevel\\s+"
-    line: "LogLevel INFO"
+    line: "LogLevel VERBOSE"
     dest: "{{ cis_sshd_config_filename }}"
   notify: "Restart sshd"
   tags:
