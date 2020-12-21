@@ -82,7 +82,7 @@ fs_mounts:
 cis_enable_ntp: true # Set to true if ntp should be enabled/configured.
 cis_enable_chrony: false # Set to true if chrony should be enabled/configured.
 
-cis_hosts_allowed_ip_range: "ALL"
+cis_hosts_allowed_ip_range: "192.168.0.0/255.255.0.0"
 
 # You should only enable either rsyslog or syslog-ng, but not both.
 cis_enable_rsyslog: true # Set to true if rsyslog should be enabled/configured.
@@ -137,7 +137,7 @@ cis_user_shell_timeout: 600
 
 cis_wheel_group_members: "root"
 
-failed_password_attempt_lockout_time: 1800
+failed_password_attempt_lockout_time: 900
 
 # Section 6
 # 6.1.1 - List of path regex to exclude when conducting filesystem permissions audit

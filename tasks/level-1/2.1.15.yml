@@ -34,3 +34,13 @@
     - "2.1.15"
     - scored
 
+- name: "Check Name: 2.1.15 Ensure mail transfer agent is configured for local-only mode"
+  replace:
+    path: /etc/postfix/main.cf
+    regexp: '^[\s]*inet_interfaces[\s]*=.*$'
+    replace: 'inet_interfaces = loopback-only'
+  tags:
+    - level-1
+    - "2.1.15"
+    - scored
+  
