@@ -3,6 +3,17 @@
 # 4.1.1.1 Ensure audit log storage size is configured (Not Scored)
 # Doesn't do anything other than checking the value set in the config. If specific site policies are defined, code can be added to tune the setting
 
+- name: 4.1.1.1 Audit log storage size is configured (Not Scored)
+  replace:
+    regexp: '^[\s]*max_log_file[\s]*=.*$'
+    replace: "max_log_file = 32MB"
+    path: "{{ cis_audit_auditd_filename }}"
+  tags:
+    - level-1
+    - section-4
+    - "4.1.1.1"
+    - not-scored
+
 - name: 4.1.1.1 Ensure audit log storage size is configured (Not Scored)
   command: grep max_log_file "{{ cis_audit_auditd_filename }}" # /etc/audit/auditd.conf
   register: audit_log_max_size
