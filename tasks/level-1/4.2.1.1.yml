@@ -29,6 +29,7 @@
 
 - name: Update selinux port rules for syslog
   command: semanage port -a -t syslogd_port_t -p tcp 1556
+  ignore_errors: yes
   tags:
     - mcaas-added
 
