@@ -7,6 +7,9 @@ This ansible content will configure an Amazon Linux 2 optimized for EKS to be GS
 
 This code is based on the GSA  AWS Elastic Kubernetes Service Benchmark.
 
+### Pre-Hardened Amazon Machine Images
+ISE provides a maintained and hardened AWS EKS AMI. More information about usage can be found [here](https://cautious-happiness-f7ecfe89.pages.github.io/techdoc_hardenedami_introduction.html) 
+
 ### Important Information
 
 You should carefully read through the tasks to make sure these changes will not break your systems before running this playbook.
@@ -28,16 +31,13 @@ There are many role variables defined in defaults/main.yml.
 
 Other settings and services are listed. Please review to ensure they meet your organizational requirements.
 
-Note, a subset of controls were removed due to operational impact or organizational dependent variables. Those are listed [here](https://docs.google.com/spreadsheets/d/1hHbPDnm5WspzGt6F67_Dw2GgLA1E0-NCAsIGeHJLK7s/edit#gid=0) *Note: Must have a GSA account to access.
+Note, a subset of controls were removed due to operational impact or organizational dependent variables. Those are listed [here](https://github.com/GSA/ansible-os-amazon-linux2-eks/tree/master/misc/complaince_settings.md)
 
 
-Dependencies
-------------
-
+### Dependencies
 Ansible >= 2.7
 
-Example Playbook
--------------------------
+### Example Playbook
 
 ```
 ---
@@ -46,15 +46,15 @@ Example Playbook
   become: yes
 
   roles:
-    - ansible-os-rhel-7
+    - ansible-os-amazon-linux2-eks
 ```
-How to test locally
---------------------------
+### How to test locally
+
 ```
 ansible-playbook playbook.yml --connection=local
 ```
-CircleCI Intergration
---------------
+### CircleCI Intergration
+
 This repository has been updated to optionally utilize Continuous Intergration with CircleCI and tests the ansbile tasks against a privledged CentOS-7 Container.  A low number of tasks are incompatiable when ran against a container vs a vm or bare-metal and have ignore_errors turned on.
 
 ##### Using CircleCI:
