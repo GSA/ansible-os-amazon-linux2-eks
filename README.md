@@ -8,7 +8,7 @@ This ansible content will configure an Amazon Linux 2 optimized for EKS to be GS
 This code is based on the GSA  AWS Elastic Kubernetes Service Benchmark.
 
 ### Pre-Hardened Amazon Machine Images
-ISE provides a maintained and hardened AWS EKS AMI. More information about usage can be found [here](https://cautious-happiness-f7ecfe89.pages.github.io/techdoc_hardenedami_introduction.html) 
+ISE provides a maintained and hardened AWS EKS AMI. More information about usage can be found [here](https://cautious-happiness-f7ecfe89.pages.github.io/techdoc_hardenedami_introduction.html)
 
 ### Important Information
 
@@ -31,7 +31,7 @@ There are many role variables defined in defaults/main.yml.
 
 Other settings and services are listed. Please review to ensure they meet your organizational requirements.
 
-Note, a subset of controls were removed due to operational impact or organizational dependent variables. Those are listed [here](https://github.com/GSA/ansible-os-amazon-linux2-eks/tree/master/misc/complaince_settings.md)
+Note, a subset of controls were removed due to operational impact or organizational dependent variables. Those are listed [here](https://github.com/GSA/ansible-os-amazon-linux2-eks/blob/master/misc/compliance_settings.md).
 
 
 ### Dependencies
