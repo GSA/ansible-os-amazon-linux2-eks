@@ -16,7 +16,8 @@
 
 - name: 1.6.1.3 Ensure SELinux policy is configured (Scored)
   selinux:
-    state: disabled
+    policy: targeted
+    state: permissive
   when: cis_disable_selinux|bool == true
   tags:
       - level-1

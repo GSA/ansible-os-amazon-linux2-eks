@@ -16,7 +16,8 @@
 
 - name: 1.6.1.2 Ensure the SELinux state is permissive (Scored)
   selinux:
-    state: disabled
+    policy: targeted
+    state: permissive
   when: cis_disable_selinux|bool == true
   tags:
       - level-1
