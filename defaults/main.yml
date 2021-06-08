@@ -33,6 +33,11 @@ cis_audit_rules_filename: "/etc/audit/rules.d/audit.rules"
 cis_sshd_config_filename: "/etc/ssh/sshd_config"
 
 ###############################################
+# SELinux
+###############################################
+cis_disable_selinux: true
+
+###############################################
 # Check specific values which can be overridden
 ###############################################
 # Section 1
