@@ -29,6 +29,7 @@
   with_items:
     - selinux
     - enforcing
+  when: cis_disable_selinux|bool == false
   notify: Reconfigure GRUB
   tags:
     - level-1
