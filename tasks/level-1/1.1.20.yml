@@ -1,9 +1,6 @@
-# Standards: 0.11
----
+# 1.1.20 - Disable Automounting
 
-# 1.1.19 - Disable Automounting
-
-- name: 1.1.19 - Disable autofs
+- name: 1.1.20 - Disable autofs
   service:
     name: autofs
     enabled: false
@@ -13,5 +10,5 @@
   failed_when: "autofs_result.failed and 'no service or tool found for: autofs' not in autofs_result.msg"
   tags:
     - level-1
-    - "1.1.19"
+    - "1.1.20"
     - scored
