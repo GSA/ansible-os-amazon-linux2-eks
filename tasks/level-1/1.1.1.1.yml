@@ -1,30 +1,34 @@
----
-# Standards: 0.11
-
 # 1.1.1.1 - Ensure mounting of cramfs filesystems is disabled
 
-- name: "1.1.1.1 | PATCH | Ensure mounting of cramfs filesystems is disabled"
-  block:
-      - name: "1.1.1.1 | PATCH | Ensure mounting of cramfs filesystems is disabled | Edit modprobe config"
-        lineinfile:
-            dest: /etc/modprobe.d/CIS.conf
-            regexp: "^(#)?install cramfs(\\s|$)"
-            line: "install cramfs /bin/true"
-            create: true
-            mode: '0600'
-
-      - name: "1.1.1.1 | PATCH | Ensure mounting of cramfs filesystems is disabled | Remove cramfs module"
-        modprobe:
-            name: cramfs
-            state: absent
-  when:
-      - amazon2cis_rule_1_1_1_1
-      - ansible_connection != 'docker'
+- name: 1.1.1.1 - Check if CIS modprobe configuration file exists
+  stat:
+    path: "{{ cis_modprobe_conf_filename }}"
+  register: modprobe_1_1_1_1
   tags:
-      - level1
-      - automated
-      - patch
-      - rule_1.1.1.1
-      - cramfs
-      - modprobe
+    - level-1
+    - section-1
+    - "1.1.1.1"
+    - scored
 
+- name: 1.1.1.1 - Ensure mounting of cramfs filesystems is disabled
+  copy:
+    dest: "{{ cis_modprobe_conf_filename }}"
+    content: "install cramfs /bin/true\n"
+  when: modprobe_1_1_1_1.stat.exists is not defined or not modprobe_1_1_1_1.stat.exists
+  tags:
+    - level-1
+    - section-1
+    - "1.1.1.1"
+    - scored
+
+- name: 1.1.1.1 - Ensure mounting of cramfs filesystems is disabled
+  lineinfile:
+    dest: "{{ cis_modprobe_conf_filename }}"
+    regexp: "^install cramfs"
+    line: "install cramfs /bin/true"
+  when: modprobe_1_1_1_1.stat.exists is defined and modprobe_1_1_1_1.stat.exists
+  tags:
+    - level-1
+    - section-1
+    - "1.1.1.1"
+    - scored
