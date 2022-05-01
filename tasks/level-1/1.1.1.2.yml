@@ -24,7 +24,7 @@
 - name: 1.1.1.2 - Ensure mounting of freevxfs filesystems is disabled
   lineinfile:
     dest: "{{ cis_modprobe_conf_filename }}"
-    regexp: "^install freevxfs"
+    regexp: "^install hfs"
     line: "install hfs /bin/true"
   when: modprobe_1_1_1_2.stat.exists is defined and modprobe_1_1_1_2.stat.exists
   tags:
