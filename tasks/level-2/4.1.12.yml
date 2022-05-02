@@ -15,7 +15,7 @@
   lineinfile:
     dest: "{{ cis_audit_rules_filename }}"
     insertafter: EOF
-    line: "-a always,exit -F path={{ item }} -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged"
+    line: "-a always,exit -F path={{ item }} -F perm=x -F auid>=500 -F auid!=4294967295 -k privileged"
   with_items: "{{ privileged_binaries.stdout_lines }}"
   notify: Generate auditd rules
   tags:
