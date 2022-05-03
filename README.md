@@ -10,7 +10,7 @@ This code is based on the GSA [GSA Amazon Linux Security Benchmark](https://docs
 Code for the GSA EKS Benchmark will be coming soon.
 
 ### Pre-Hardened Amazon Machine Images
-ISE provides a maintained and hardened AWS EKS AMI. More information about usage can be found [here](https://odp.gsa.gov/techdoc_hardenedami_introduction.html)
+ISE provides a maintained and hardened AWS EKS AMI. More information about usage can be found [here](https://odp.gsa.gov/techdoc_hardenedami_introduction.html).
 
 
 ### Important Information
@@ -35,7 +35,7 @@ There are many role variables defined in defaults/main.yml.
 Other settings and services are listed. Please review to ensure they meet your organizational requirements.
 
 ### Compliance documentation
-For a complete list of settings that are configured, need to be configured, or are known false positives, please refer to the following [documentation](https://docs.google.com/spreadsheets/d/1nNB-irY7qALa-3K0dTL8P5sTQNMA0DhzsNXW-x9aAxE/edit#gid=0). Note this requires a GSA account to view. 
+For a complete list of settings that are configured, need to be configured, or are known false positives, please refer to the following [documentation](https://docs.google.com/spreadsheets/d/1nNB-irY7qALa-3K0dTL8P5sTQNMA0DhzsNXW-x9aAxE/edit#gid=0). Note this requires a GSA account to view.
 
 
 ### Dependencies
