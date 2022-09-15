@@ -1,5 +1,11 @@
 # 1.1.19 Ensure sticky bit is set on all world-writable directories
 
+#Because GSA uses Bigfix, Bigfix Agent requires access to some world writable directories on system
+#If you see the following finding in Compliance Scans it is a false positive
+
+#The command '/bin/df --local -P | /bin/awk {'if (NR!=1) print $6'} | /usr/bin/xargs -I '{}' /usr/bin/find '{}' -xdev -type d \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null | /bin/awk '{print} END {if (NR == 0) print "none"}'' returned :
+#/var/opt/BESCommon
+
 - name: 1.1.19 - Ensure sticky bit is set on all world-writable directories
   shell: "df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d -perm -0002 2>/dev/null | xargs chmod a+t"
   tags:
@@ -7,3 +13,4 @@
     - section-1
     - "1.1.19"
     - scored
+
