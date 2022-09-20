@@ -1,32 +1,19 @@
 # 1.1.1.5 - Ensure mounting of udf filesystems is disabled
 
-- name: 1.1.1.5 - Check if CIS modprobe configuration file exists
-  stat:
-    path: "{{ cis_modprobe_conf_filename }}"
-  register: modprobe_1_1_1_5
-  tags:
-    - level-1
-    - section-1
-    - "1.1.1.5"
-    - scored
+- name: "1.1.1.5 | PATCH | Ensure mounting of udf filesystems is disabled"
+  block:
+      - name: "1.1.1.5 | PATCH | Ensure mounting of udf filesystems is disabled | Edit modprobe config"
+        lineinfile:
+            dest: /etc/modprobe.d/CIS.conf
+            regexp: "^(#)?install udf(\\s|$)"
+            line: "install udf /bin/true"
+            create: true
+            mode: '0600'
 
-- name: 1.1.1.5 - Ensure mounting of udf filesystems is disabled
-  copy:
-    dest: "{{ cis_modprobe_conf_filename }}"
-    content: "install udf /bin/true\n"
-  when: modprobe_1_1_1_5.stat.exists is not defined or not modprobe_1_1_1_5.stat.exists
-  tags:
-    - level-1
-    - section-1
-    - "1.1.1.5"
-    - scored
-
-- name: 1.1.1.5 - Ensure mounting of udf filesystems is disabled
-  lineinfile:
-    dest: "{{ cis_modprobe_conf_filename }}"
-    regexp: "^install udf"
-    line: "install udf /bin/true"
-  when: modprobe_1_1_1_5.stat.exists is defined and modprobe_1_1_1_5.stat.exists
+      - name: "1.1.1.5 | PATCH | Ensure mounting of udf filesystems is disabled | Remove udf module"
+        modprobe:
+            name: udf
+            state: absent
   tags:
     - level-1
     - section-1

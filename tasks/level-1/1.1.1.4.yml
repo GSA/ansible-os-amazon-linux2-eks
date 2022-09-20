@@ -1,32 +1,19 @@
 # 1.1.1.4 - Ensure mounting of squashfs filesystems is disabled
 
-- name: 1.1.1.4 - Check if CIS modprobe configuration file exists
-  stat:
-    path: "{{ cis_modprobe_conf_filename }}"
-  register: modprobe_1_1_1_4
-  tags:
-    - level-1
-    - section-1
-    - "1.1.1.4"
-    - scored
+- name: "1.1.1.4 | PATCH | Ensure mounting of squashfs filesystems is disabled"
+  block:
+      - name: "1.1.1.4 | PATCH | Ensure mounting of squashfs filesystems is disabled | Edit modprobe config"
+        lineinfile:
+            dest: /etc/modprobe.d/CIS.conf
+            regexp: "^(#)?install squashfs(\\s|$)"
+            line: "install squashfs /bin/true"
+            create: true
+            mode: '0600'
 
-- name: 1.1.1.4 - Ensure mounting of squashfs filesystems is disabled
-  copy:
-    dest: "{{ cis_modprobe_conf_filename }}"
-    content: "install squashfs /bin/true\n"
-  when: modprobe_1_1_1_4.stat.exists is not defined or not modprobe_1_1_1_4.stat.exists
-  tags:
-    - level-1
-    - section-1
-    - "1.1.1.4"
-    - scored
-
-- name: 1.1.1.4 - Ensure mounting of hfs filesystems is disabled
-  lineinfile:
-    dest: "{{ cis_modprobe_conf_filename }}"
-    regexp: "^install squashfs\\s+"
-    line: "install squashfs /bin/true"
-  when: modprobe_1_1_1_4.stat.exists is defined and modprobe_1_1_1_4.stat.exists
+      - name: "1.1.1.4 | PATCH | Ensure mounting of cramfs filesystems is disabled | Remove squashfs module"
+        modprobe:
+            name: squashfs
+            state: absent
   tags:
     - level-1
     - section-1
