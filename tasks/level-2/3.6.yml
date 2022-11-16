@@ -51,7 +51,7 @@
     dest: "{{ cis_grub_configuration_filename }}"
     regexp: '^(GRUB_CMDLINE_LINUX_DEFAULT=.*)\"$'
     replace: '\1 ipv6.disable=1"'
-  when: bootloader_config_3_6.stat.exists and in_container is not defined
+  when: bootloader_config_3_6.stat.exists
   notify: Reconfigure GRUB
   tags:
     - level-2
