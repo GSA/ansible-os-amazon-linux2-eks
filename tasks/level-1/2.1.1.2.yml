@@ -6,7 +6,7 @@
   replace:
     path: /etc/sysconfig/ntpd
     regexp: '^OPTIONS=.*$'
-    replace: 'OPTIONS="-u ntp:ntp"'
+    replace: '#OPTIONS="-u ntp:ntp"'
   when: cis_enable_ntp and not cis_enable_chrony
   tags:
     - level-1
