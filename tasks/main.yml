@@ -5,11 +5,11 @@
   when: cis_apply_level_1_profile or cis_apply_level_2_profile
 
 - include_tasks: "level-1.yml"
-  become: yes
+# become: yes
   when: cis_apply_level_1_profile
 
 - include_tasks: "level-2.yml"
-  become: yes
+# become: yes
   when: cis_apply_level_2_profile
 
 - name: flush handlers
