@@ -16,7 +16,7 @@
 - name: 3.6 - Disable IPv6 kernel module
   copy:
     dest: "{{ cis_modprobe_conf_filename }}"
-    content: "options ipv6 disable=1\n"
+    content: "options ipv6 disable=0\n"    ## Enabled for ipv6
   when: modprobe_3_6.stat.exists is not defined or not modprobe_3_6.stat.exists
   tags:
     - level-2
@@ -28,7 +28,7 @@
   lineinfile:
     dest: "{{ cis_modprobe_conf_filename }}"
     regexp: "^options ipv6 disable="
-    line: "options ipv6 disable=1"
+    line: "options ipv6 disable=0"  ## Enabled for ipv6
   when: modprobe_3_6.stat.exists is defined and modprobe_3_6.stat.exists
   tags:
     - level-2
@@ -50,7 +50,7 @@
   replace:
     dest: "{{ cis_grub_configuration_filename }}"
     regexp: '^(GRUB_CMDLINE_LINUX_DEFAULT=.*)\"$'
-    replace: '\1 ipv6.disable=1"'
+    replace: '\1 ipv6.disable=0"'    ## Enabled for ipv6
   when: bootloader_config_3_6.stat.exists
   notify: Reconfigure GRUB
   tags:

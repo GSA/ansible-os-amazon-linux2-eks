@@ -1,0 +1,26 @@
+---
+- name: Enable IPv6 in sysctl
+  sysctl:
+    name: net.ipv6.conf.all.disable_ipv6
+    value: 0
+    state: present
+    reload: yes
+
+- name: Add or update IPv6INIT parameter
+  lineinfile:
+    path: /etc/sysconfig/network-scripts/ifcfg-eth0
+    regexp: '^IPV6INIT='
+    line: 'IPV6INIT=yes'
+    create: yes
+
+- name: Add or update IPv6_AUTOCONF parameter
+  lineinfile:
+    path: /etc/sysconfig/network-scripts/ifcfg-eth0
+    regexp: '^IPV6_AUTOCONF='
+    line: 'IPV6_AUTOCONF=yes'
+    create: yes
+
+- name: Restart network service
+  service:
+     name: network
+     state: restarted
