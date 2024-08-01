@@ -43,7 +43,7 @@
     - "sysctl -w net.ipv4.ip_forward=1"  ## Enabled based as it breaks EKS cluster DNS
     - "sysctl -w net.ipv4.route.flush=1"
     - "sysctl -w net.ipv6.conf.all.forwarding=1"  ## Enabled based as it breaks EKS Cluster DNS for ipv6
-    - "sysctl -w net.ipv6.conf.eth0.accept_ra=2  ## ra must be enabled specifically on eth0 in order to get default ipv6 route
+    - "sysctl -w net.ipv6.conf.eth0.accept_ra=2"  ## ra must be enabled specifically on eth0 in order to get default ipv6 route
     - "sysctl -w net.ipv6.route.flush=1"
   tags:
     - level-1
