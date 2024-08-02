@@ -12,5 +12,8 @@
 # become: yes
   when: cis_apply_level_2_profile
 
+- include_tasks: ipv6.yml
+# become: yes
+
 - name: flush handlers
   meta: flush_handlers
