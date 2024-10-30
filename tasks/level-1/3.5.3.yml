@@ -4,9 +4,7 @@
 # 3.5.3 Ensure iptables is installed
 
 - name: 3.5.3 - Ensure iptables is installed
-  yum:
-    name: "iptables"
-    state: latest
+  shell: "yum install iptables -y"
   tags:
     - level-1
     - section-3

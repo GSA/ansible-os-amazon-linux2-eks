@@ -4,9 +4,7 @@
 # 3.3.1 Ensure TCP Wrappers is installed
 
 - name: 3.3.1 - Ensure TCP Wrappers is installed
-  yum:
-    name: "tcp_wrappers"
-    state: latest
+  shell: "yum install tcp_wrappers -y"
   tags:
     - level-1
     - section-3
