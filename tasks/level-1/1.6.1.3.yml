@@ -3,24 +3,26 @@
 
 # 1.6.1.3 Ensure SELinux policy is configured (Scored)
 
-- name: 1.6.1.3 Ensure SELinux policy is configured (Scored)
-  selinux:
-    policy: targeted
-    state: enforcing
+- name: Ensure SELinux is not disabled
+  replace:
+    path: /etc/selinux/config
+    regexp: '^SELINUX=.*'
+    replace: '^SELINUX=enforcing'
   when: cis_disable_selinux|bool == false
   tags:
-      - level-1
-      - section-1
-      - "1.6.1.3"
-      - scored
+    - level-1
+    - section-1
+    - "1.6.1.3"
+    - scored
 
-- name: 1.6.1.3 Ensure SELinux policy is configured (Scored)
-  selinux:
-    policy: targeted
-    state: permissive
+- name: Ensure SELinux policy is targeted
+  replace:
+    path: /etc/selinux/config
+    regexp: '^SELINUXTYPE=.*'
+    replace: '^SELINUXTYPE=targeted'
   when: cis_disable_selinux|bool == true
   tags:
-      - level-1
-      - section-1
-      - "1.6.1.3"
-      - scored
+    - level-1
+    - section-1
+    - "1.6.1.3"
+    - scored
