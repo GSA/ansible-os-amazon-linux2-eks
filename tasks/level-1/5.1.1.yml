@@ -4,9 +4,7 @@
 # 5.1.1 Ensure cron daemon is enabled
 
 - name: 5.1.1 - Ensure cron is installed
-  yum:
-    name: cronie
-    state: present
+  shell: "yum install cronie -y"
   tags:
     - level-1
     - section-5
