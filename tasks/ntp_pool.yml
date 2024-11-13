@@ -1,0 +1,17 @@
+---
+
+## Remove ntp time pool in /etc/chrony.d/ntp-pool.sources and replace with amazon time server
+## Time synchronization server needs to be updated to 169.254.169.123
+## Secops firewall will block any other time server outside the one directly from amazon.
+
+- name: remove ntp pool and replace with amazon time server
+  replace:
+    path: /etc/chrony.d/ntp-pool.sources
+    regexp: '^pool [0-2]\.amazon\.pool\.ntp\.org iburst maxsources [1-2]'
+    replace: ''
+  
+- name: 
+  lineinfile:
+    path: /etc/chrony.d/ntp-pool.sources
+    line: 'server 169.254.169.123 prefer iburst minpoll 4 maxpoll 4'
+    insertafter: EOF
