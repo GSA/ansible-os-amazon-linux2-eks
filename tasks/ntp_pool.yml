@@ -10,7 +10,7 @@
     regexp: '^pool [0-2]\.amazon\.pool\.ntp\.org iburst maxsources [1-2]'
     replace: ''
   
-- name: 
+- name: add amazon time server to file
   lineinfile:
     path: /etc/chrony.d/ntp-pool.sources
     line: 'server 169.254.169.123 prefer iburst minpoll 4 maxpoll 4'
