@@ -15,5 +15,7 @@
 - include_tasks: ipv6.yml
 # become: yes
 
+- include_tasks: ntp_pool.yml
+
 - name: flush handlers
   meta: flush_handlers
